@@ -1,11 +1,10 @@
-resource "aws_iam_user" "first_user" {
-  name = "my-new-user"
-
-  tags = {
-    env = "dev"
-  }
+provider "aws"{
+  region = "us-west-2"
 }
-
-resource "aws_iam_access_key" "keys" {
-  user = aws_iam_user.first_user.name
+resource "aws_ecr_repository" "foo" {
+  name                 = "bar"
+  image_tag_mutability = "IMMUTABLE"
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }
