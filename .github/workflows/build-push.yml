@@ -33,3 +33,11 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 734435005720.dkr.ecr.us-east-2.amazonaws.com/bar:latest
+
+      - name: Send Slack notification on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          channel-id: 'C06Q1AM5NQ1' # ID of Slack Channel you want to post to
+          slack-message: 'posting from a github action!' # The message you want to post
+          payload: '{"text": "Failed to push Docker image to Amazon ECR."}'
