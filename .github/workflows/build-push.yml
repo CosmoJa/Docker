@@ -28,11 +28,15 @@ jobs:
         run: docker build -t my-image:latest .
 
       - name: Tag Docker image
-        run: docker tag my-image:latest 734435005720.dkr.ecr.us-east-2.amazonaws.com/bar:latest
-
+        run: docker tag my-image:latest 734435005720.dkr.ecr.us-east-2.amazonaws.com/zhyldyz-exercise:latest
+     
+      - name: Pull Docker image to Amazon ECR
+        run: 
+          docker pull 734435005720.dkr.ecr.us-east-2.amazonaws.com/zhyldyz-exercise:latest
+        
       - name: Push Docker image to Amazon ECR
-        run: |
-          docker push 734435005720.dkr.ecr.us-east-2.amazonaws.com/bar:latest
+        run: 
+          docker push 734435005720.dkr.ecr.us-east-2.amazonaws.com/zhyldyz-exercise:latest
 
       - name: Send Slack notification on failure
         if: failure()
